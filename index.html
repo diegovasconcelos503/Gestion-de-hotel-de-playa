@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotel Costa del Sol · Hotel boutique de playa en El Salvador</title>
+  <meta name="description" content="Hotel boutique frente al mar en El Salvador. Reserva tu habitación, descubre rutas turísticas y vive la costa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { deep: '#0D3B3E', crema: '#F6F1E6', lino: '#FBF8F2', cobre: '#C17F52', tinta: '#2E2E2E' } } } };
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a href="#reservar" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-white focus:p-3">Saltar a reservar</a>
+
+  <!-- ============================ NAVBAR ============================ -->
+  <header class="sticky top-0 z-50 bg-lino/95 backdrop-blur border-b border-[var(--linea)]">
+    <div class="max-w-7xl mx-auto px-5 h-[68px] flex items-center justify-between gap-4">
+      <div class="relative">
+        <a href="#inicio" id="logo-btn" class="leading-none block" aria-haspopup="true" aria-expanded="false" aria-label="Hotel Costa del Sol">
+          <span class="font-display text-[1.35rem] font-bold text-deep tracking-wide">COSTA DEL SOL</span>
+          <span class="block text-[.6rem] tracking-[.18em] text-[var(--cobre-txt)] font-semibold mt-1">HOTEL BOUTIQUE · EL SALVADOR</span>
+        </a>
+        <div class="logo-menu" id="logo-menu" hidden role="menu">
+          <a href="#inicio" role="menuitem">Ir al inicio</a>
+          <button type="button" role="menuitem" data-admin-open>Acceso del personal</button>
+        </div>
+      </div>
+      <nav class="hidden lg:flex items-center gap-7 text-[.8rem] font-medium text-tinta" aria-label="Principal">
+        <a href="#inicio" class="hover:text-deep">Inicio</a>
+        <a href="#nosotros" class="hover:text-deep">Sobre Nosotros</a>
+        <a href="#servicios" class="hover:text-deep">Servicios</a>
+        <a href="#habitaciones" class="hover:text-deep">Habitaciones</a>
+        <a href="#experiencias" class="hover:text-deep">Experiencias</a>
+        <a href="#rutas" class="hover:text-deep">Rutas</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <div id="auth-area" class="hidden sm:flex items-center gap-3 text-[.8rem]"></div>
+        <a href="#reservar" class="btn btn-primary hidden sm:inline-flex">Reservar</a>
+        <button id="menu-btn" class="lg:hidden icon-ring" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobile-nav"></button>
+      </div>
+    </div>
+    <nav id="mobile-nav" class="lg:hidden hidden border-t border-[var(--linea)] bg-lino px-5 py-4 flex-col gap-3 text-sm" aria-label="Móvil">
+      <a href="#inicio">Inicio</a><a href="#nosotros">Sobre Nosotros</a><a href="#servicios">Servicios</a>
+      <a href="#habitaciones">Habitaciones</a><a href="#experiencias">Experiencias</a><a href="#rutas">Rutas</a>
+      <a href="#reservar" class="btn btn-primary mt-2">Reservar</a>
+      <div id="auth-area-m" class="pt-3 border-t border-[var(--linea)] flex flex-wrap gap-3"></div>
+    </nav>
+  </header>
+
+  <main id="sitio">
+    <!-- ============================= HERO ============================= -->
+    <section id="inicio" class="hero-bg text-white">
+      <div class="max-w-7xl mx-auto px-5 min-h-[72vh] flex flex-col items-center justify-center text-center py-24">
+        <p class="text-[.7rem] tracking-[.22em] font-semibold text-[#f0cfae]">BOUTIQUE HOTEL DE PLAYA</p>
+        <h1 class="font-display font-bold text-5xl md:text-7xl mt-4 leading-[1.05]">Hotel Costa del Sol</h1>
+        <p class="mt-5 text-lg md:text-xl text-white/90 max-w-xl">Tu paraíso frente al mar en El Salvador</p>
+        <a href="#reservar" class="btn btn-primary mt-9 !bg-deep border border-white/20">Reservar ahora</a>
+      </div>
+    </section>
+
+    <!-- ============================ NOSOTROS ============================ -->
+    <section id="nosotros" class="py-20 md:py-28">
+      <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
+        <div>
+          <p class="eyebrow">Nuestra historia</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Un refugio de paz y lujo tropical</h2>
+          <p class="mt-7 text-[.95rem] leading-7 text-tinta/80">Diseñado para fundirse con la belleza natural de la costa salvadoreña, Hotel Costa del Sol combina la calidez de la hospitalidad local con el confort de un resort boutique de clase mundial.</p>
+          <p class="mt-4 text-[.95rem] leading-7 text-tinta/80">Ubicado en una de las playas más exclusivas del país, ofrecemos un escape privado donde el rumor de las olas y el siseo de las palmeras son la única banda sonora de tus días de descanso.</p>
+          <a href="#servicios" class="btn btn-outline mt-8">Conocer más</a>
+        </div>
+        <img src="assets/img/historia.jpg" alt="Terraza con hamaca y vista al jardín tropical del hotel" class="w-full rounded-md object-cover aspect-[4/4.2] shadow-lg" loading="lazy">
+      </div>
+    </section>
+
+    <!-- ============================ SERVICIOS ============================ -->
+    <section id="servicios" class="py-20 bg-crema">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow">Comodidades exclusivas</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Todo lo necesario para tu descanso</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">Un edificio de cuatro niveles pensado para que no extrañes nada: del restaurante y el gimnasio de la planta baja a las suites con vista al mar.</p>
+        </div>
+        <h3 class="font-display text-xl text-deep mt-14 mb-5">Incluidos en tu estadía</h3>
+        <div id="srv-incluidos" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        <h3 class="font-display text-xl text-deep mt-12 mb-5">Servicios adicionales</h3>
+        <div id="srv-extras" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- =========================== HABITACIONES =========================== -->
+    <section id="habitaciones" class="py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow">Estadía de ensueño</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Nuestras Suites &amp; Habitaciones</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">Habitaciones diseñadas con un estilo tropical moderno y sobrio para garantizar el descanso más profundo.</p>
+        </div>
+        <div id="room-cards" class="grid md:grid-cols-3 gap-6 mt-12" aria-live="polite">
+          <div class="skeleton h-96"></div><div class="skeleton h-96"></div><div class="skeleton h-96"></div>
+        </div>
+        <div id="niveles" class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3 text-sm"></div>
+      </div>
+    </section>
+
+    <!-- ============================== GALERÍA ============================== -->
+    <section id="galeria" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow">Galería visual</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Un vistazo a tu próximo refugio</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">Capturas genuinas de la experiencia que te espera en Costa del Sol.</p>
+        </div>
+        <div class="grid grid-cols-2 gap-3 md:gap-4 mt-12">
+          <img src="assets/img/galeria1.jpg" alt="Piscina frente al mar con camastros y sombrillas" class="w-full h-full object-cover aspect-[16/9] rounded-md" loading="lazy">
+          <img src="assets/img/galeria2.jpg" alt="Plato de autor con vista a la terraza del restaurante" class="w-full h-full object-cover aspect-[16/9] rounded-md" loading="lazy">
+          <img src="assets/img/galeria3.jpg" alt="Cócteles tropicales sobre la arena" class="w-full h-full object-cover aspect-[16/9] rounded-md" loading="lazy">
+          <img src="assets/img/galeria4.jpg" alt="Fogata nocturna con cojines frente al mar" class="w-full h-full object-cover aspect-[16/9] rounded-md" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ EXPERIENCIAS ============================ -->
+    <section id="experiencias" class="py-20 bg-crema">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <h2 class="title text-4xl md:text-5xl">Experiencias exclusivas</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">Diseñamos actividades inmersivas para conectar profundamente con la naturaleza y cultura de El Salvador.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-5 mt-12" id="exp-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================== RUTAS ============================== -->
+    <section id="rutas" class="py-20">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow">Explora El Salvador</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Mapa de Rutas Turísticas</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">La Costa del Sol es el punto de partida perfecto para descubrir volcanes, ruinas mayas y pueblos llenos de color. Toca una ruta para ver el mapa y agrégala a tu reserva.</p>
+        </div>
+        <div id="route-cards" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-12" aria-live="polite">
+          <div class="skeleton h-56"></div><div class="skeleton h-56"></div><div class="skeleton h-56"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== RESEÑAS ============================== -->
+    <section id="resenas" class="py-20 bg-white">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p class="eyebrow">Reseñas de huéspedes</p>
+            <h2 class="title text-4xl mt-3">Lo que cuentan quienes nos visitaron</h2>
+          </div>
+          <button id="btn-resena" class="btn btn-outline">Escribir una reseña</button>
+        </div>
+        <div id="review-list" class="grid md:grid-cols-3 gap-5 mt-10"></div>
+      </div>
+    </section>
+
+    <!-- ============================== RESERVAR ============================== -->
+    <section id="reservar" class="py-20 bg-crema">
+      <div class="max-w-6xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="eyebrow">Reserva en línea</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Elige tu habitación</h2>
+          <p class="mt-4 text-tinta/70 text-[.95rem]">Selecciona fechas y categoría, escoge tu número de habitación en el mapa del edificio y, si quieres, suma rutas turísticas. Pagas en línea y tu reserva queda <strong>confirmada al instante</strong>, sin esperar la respuesta de recepción. Recibes tu factura al terminar.</p>
+        </div>
+
+        <div class="grid lg:grid-cols-[1fr_340px] gap-8 mt-12 items-start">
+          <form id="booking-form" class="space-y-8" novalidate>
+            <!-- Paso 1 -->
+            <fieldset class="card p-6">
+              <legend class="font-display text-xl text-deep px-1">1. Fechas y huéspedes</legend>
+              <div class="grid sm:grid-cols-3 gap-4 mt-3">
+                <div class="field"><label for="b-llegada">Llegada</label><input id="b-llegada" type="date" class="input" required><p class="err"></p></div>
+                <div class="field"><label for="b-salida">Salida</label><input id="b-salida" type="date" class="input" required><p class="err"></p></div>
+                <div class="field"><label for="b-huespedes">Huéspedes</label><input id="b-huespedes" type="number" min="1" value="2" class="input" required><p class="err"></p></div>
+              </div>
+            </fieldset>
+
+            <!-- Paso 2 -->
+            <fieldset class="card p-6">
+              <legend class="font-display text-xl text-deep px-1">2. Categoría de habitación</legend>
+              <div id="b-tipos" class="grid sm:grid-cols-3 gap-3 mt-3"></div>
+            </fieldset>
+
+            <!-- Paso 3 -->
+            <fieldset class="card p-6">
+              <legend class="font-display text-xl text-deep px-1">3. Número de habitación</legend>
+              <div id="b-rooms-info" class="text-sm text-tinta/70 mt-2">Elige fechas y una categoría para ver las habitaciones disponibles.</div>
+              <div id="b-rooms" class="room-grid mt-4" role="group" aria-label="Habitaciones"></div>
+              <div id="b-legend" class="hidden flex-wrap gap-5 text-xs mt-4 text-tinta/70">
+                <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 border border-deep bg-white"></i>Disponible</span>
+                <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 bg-deep"></i>Tu selección</span>
+                <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 bg-[var(--ocupada)]"></i>Ocupada en esas fechas</span>
+              </div>
+            </fieldset>
+
+            <!-- Paso 4 -->
+            <fieldset class="card p-6">
+              <legend class="font-display text-xl text-deep px-1">4. Rutas y tours (opcional)</legend>
+              <div id="b-rutas" class="mt-3"></div>
+              <div class="field mt-6"><label for="b-notas">Solicitudes especiales</label>
+                <textarea id="b-notas" rows="3" maxlength="1000" class="input" placeholder="Hora estimada de llegada, alergias, celebración especial…"></textarea></div>
+            </fieldset>
+          </form>
+
+          <aside class="card p-6 lg:sticky lg:top-24" aria-live="polite">
+            <h3 class="font-display text-xl text-deep">Resumen</h3>
+            <dl id="b-summary" class="mt-4 text-sm space-y-2"></dl>
+            <button id="b-submit" type="button" class="btn btn-primary w-full mt-6">Continuar al pago</button>
+            <p class="text-xs text-tinta/60 mt-3">Elige tu método de pago al reservar y recibe tu factura al instante.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== CONTACTO ============================== -->
+    <section id="contacto" class="py-20">
+      <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="eyebrow">Ubicación &amp; contacto</p>
+          <h2 class="title text-4xl md:text-5xl mt-3">Estamos listos para recibirte</h2>
+          <ul class="mt-8 space-y-5">
+            <li class="flex items-center gap-4"><span class="icon-circle" id="ic-phone"></span><div><p class="eyebrow !text-[.62rem]">Llámanos</p><a href="tel:+50323456789" class="font-display font-semibold text-deep">+503 2345 6789</a></div></li>
+            <li class="flex items-center gap-4"><span class="icon-circle" id="ic-mail"></span><div><p class="eyebrow !text-[.62rem]">Correo electrónico</p><a href="mailto:reservas@hotelcostadelsol.com" class="font-display font-semibold text-deep">reservas@hotelcostadelsol.com</a></div></li>
+            <li class="flex items-center gap-4"><span class="icon-circle" id="ic-pin"></span><div><p class="eyebrow !text-[.62rem]">Encuéntranos</p><p class="font-display font-semibold text-deep">Km 65 Boulevard Costa del Sol, La Paz, El Salvador</p></div></li>
+          </ul>
+          <div class="flex gap-3 mt-9" id="socials"></div>
+        </div>
+        <img src="assets/img/contacto.jpg" alt="Vista aérea de la playa y las palmeras de la Costa del Sol" class="w-full rounded-md object-cover aspect-[4/3] shadow-lg" loading="lazy">
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="bg-deep text-white border-t-4 border-[#1b79b8]">
+    <div class="max-w-6xl mx-auto px-5 pt-16 pb-8">
+      <div class="grid md:grid-cols-[1.4fr_1fr_1fr_1fr] gap-10">
+        <div>
+          <p class="font-display text-2xl font-bold tracking-wide">COSTA DEL SOL</p>
+          <p class="text-sm text-white/65 mt-4 max-w-xs leading-6">Un rincón de paraíso en El Salvador pensado para el descanso, la desconexión y la alta cocina junto al mar.</p>
+        </div>
+        <div><p class="text-[.68rem] tracking-[.14em] font-semibold text-[#e0a77e]">NAVEGACIÓN</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/80"><li><a href="#inicio" class="hover:text-white">Inicio</a></li><li><a href="#nosotros" class="hover:text-white">Sobre Nosotros</a></li><li><a href="#servicios" class="hover:text-white">Servicios</a></li><li><a href="#habitaciones" class="hover:text-white">Habitaciones</a></li></ul></div>
+        <div><p class="text-[.68rem] tracking-[.14em] font-semibold text-[#e0a77e]">EXPERIENCIA</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/80"><li><a href="#servicios" class="hover:text-white">Gastronomía</a></li><li><a href="#servicios" class="hover:text-white">Spa &amp; Wellness</a></li><li><a href="#rutas" class="hover:text-white">Tours Guiados</a></li><li><a href="#experiencias" class="hover:text-white">Surfing</a></li></ul></div>
+        <div><p class="text-[.68rem] tracking-[.14em] font-semibold text-[#e0a77e]">SOPORTE &amp; LEGAL</p>
+          <ul class="mt-4 space-y-2 text-sm text-white/80"><li><a href="#contacto" class="hover:text-white">Preguntas Frecuentes</a></li><li><a href="#contacto" class="hover:text-white">Políticas de Cancelación</a></li><li><a href="#contacto" class="hover:text-white">Términos de Servicio</a></li><li><a href="#contacto" class="hover:text-white">Privacidad</a></li></ul></div>
+      </div>
+      <div class="border-t border-white/10 mt-12 pt-6 flex flex-wrap gap-x-10 gap-y-4 justify-between items-start text-xs text-white/60">
+        <div>
+          <p>© 2026 Hotel Costa del Sol. Todos los derechos reservados.</p>
+          <p class="mt-3 text-sm md:text-base font-bold text-white/90">Proyecto final de Lenguaje Interpretado del Cliente</p>
+        </div>
+        <p class="md:text-right max-w-md leading-5">Sitio web creado por:<br><span class="text-white/80">Sofía Elizabeth López Molina · Patricia Verenice Mendez Perez · Marianne Priscilla Torres Mejía · Diego Alberto Vasconcelos Baisa</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================== MODALES ============================== -->
+    <!-- ============ ADMINISTRACIÓN (integrada en el sitio) ============ -->
+  <div id="admin-root" class="fixed inset-0 z-[55] overflow-auto bg-crema" hidden>
+
+  <!-- ============ LOGIN DE ADMINISTRADOR ============ -->
+  <section id="login-view" class="min-h-screen flex items-center justify-center px-5 bg-deep" hidden>
+    <form id="form-admin" class="bg-lino rounded-md p-8 w-full max-w-sm shadow-2xl" novalidate>
+      <p class="font-display text-2xl font-bold text-deep tracking-wide">COSTA DEL SOL</p>
+      <p class="eyebrow mt-1">Acceso de administrador</p>
+      <div class="field mt-7"><label for="a-user">Usuario</label><input id="a-user" class="input" autocomplete="username" autofocus><p class="err"></p></div>
+      <div class="field mt-4"><label for="a-pass">Contraseña</label><input id="a-pass" type="password" class="input" autocomplete="current-password"><p class="err"></p></div>
+      <p id="a-err" class="err mt-2" role="alert"></p>
+      <button class="btn btn-primary w-full mt-3">Ingresar</button>
+      <button type="button" data-admin-close class="block mx-auto text-xs text-tinta/60 mt-5 hover:underline">← Volver al sitio</button>
+    </form>
+  </section>
+
+  <!-- ============ PANEL ============ -->
+  <div id="panel-view" hidden>
+    <header class="bg-deep text-white">
+      <div class="max-w-7xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
+        <div><span class="font-display font-bold text-lg tracking-wide">COSTA DEL SOL</span> <span class="text-white/60 text-sm ml-2">Administración</span></div>
+        <div class="flex items-center gap-4 text-sm">
+          <span id="admin-name" class="text-white/80 hidden sm:inline"></span>
+          <button type="button" data-admin-close class="hover:underline">Ver sitio</button>
+          <button id="btn-salir" class="hover:underline">Salir</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-5 py-8">
+      <div class="flex gap-1 border-b border-[var(--linea)] overflow-x-auto" role="tablist" id="tabs">
+        <button role="tab" data-tab="res" aria-selected="true" class="px-5 py-3 text-sm font-semibold border-b-2 border-deep text-deep whitespace-nowrap">Reservas</button>
+        <button role="tab" data-tab="ocu" aria-selected="false" class="px-5 py-3 text-sm font-semibold border-b-2 border-transparent text-tinta/60 whitespace-nowrap">Habitaciones</button>
+        <button role="tab" data-tab="cli" aria-selected="false" class="px-5 py-3 text-sm font-semibold border-b-2 border-transparent text-tinta/60 whitespace-nowrap">Clientes</button>
+        <button role="tab" data-tab="rut" aria-selected="false" class="px-5 py-3 text-sm font-semibold border-b-2 border-transparent text-tinta/60 whitespace-nowrap">Rutas</button>
+        <button role="tab" data-tab="rev" aria-selected="false" class="px-5 py-3 text-sm font-semibold border-b-2 border-transparent text-tinta/60 whitespace-nowrap">Reseñas</button>
+        <button role="tab" data-tab="bd" aria-selected="false" class="px-5 py-3 text-sm font-semibold border-b-2 border-transparent text-tinta/60 whitespace-nowrap">Base de datos</button>
+      </div>
+
+      <!-- RESERVAS -->
+      <section id="view-res" class="mt-6">
+        <div id="stats" class="grid grid-cols-3 gap-3 max-w-xl"></div>
+        <div class="flex flex-wrap gap-3 items-end mt-6">
+          <div class="field grow max-w-xs"><label for="f-q">Buscar</label><input id="f-q" class="input" placeholder="Nombre, correo, N.º reserva o habitación"></div>
+          <div class="field"><label for="f-estado">Estado</label>
+            <select id="f-estado" class="input"><option value="">Todos</option><option>Pendiente</option><option>Confirmada</option><option>Cancelada</option></select></div>
+          <label class="flex items-center gap-2 text-sm pb-3"><input type="checkbox" id="f-vigentes" checked> Solo vigentes (salida hoy o después)</label>
+          <button class="btn btn-primary ml-auto" id="btn-nueva-res">+ Nueva reserva</button>
+        </div>
+        <div class="card mt-4 overflow-x-auto">
+          <table class="w-full text-sm min-w-[860px]">
+            <thead class="text-left text-xs uppercase tracking-wider text-tinta/60 border-b border-[var(--linea)]">
+              <tr><th class="p-3">#</th><th class="p-3">Cliente</th><th class="p-3">Habitación</th><th class="p-3">Estadía</th><th class="p-3">Rutas</th><th class="p-3 text-right">Total</th><th class="p-3">Estado</th><th class="p-3"></th></tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- OCUPACIÓN -->
+      <section id="view-ocu" class="mt-6" hidden>
+        <div class="flex flex-wrap gap-3 items-end">
+          <div class="field"><label for="o-llegada">Desde</label><input id="o-llegada" type="date" class="input"></div>
+          <div class="field"><label for="o-salida">Hasta (noche anterior)</label><input id="o-salida" type="date" class="input"></div>
+          <p id="o-resumen" class="text-sm pb-3 text-tinta/80"></p>
+        </div>
+        <div class="flex flex-wrap gap-5 text-xs mt-4 text-tinta/70">
+          <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 border border-deep bg-white"></i>Libre</span>
+          <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 bg-cobre"></i>Ocupada · pendiente</span>
+          <span class="inline-flex items-center gap-2"><i class="inline-block w-4 h-3 bg-deep"></i>Ocupada · confirmada</span>
+          <span>Haz clic en una habitación ocupada para editar o extender su reserva.</span>
+        </div>
+        <div id="ocu-niveles" class="mt-6 space-y-8"></div>
+      </section>
+
+      <!-- CLIENTES -->
+      <section id="view-cli" class="mt-6" hidden>
+        <div class="flex flex-wrap gap-3 items-end">
+          <div class="field grow max-w-xs"><label for="c-q">Buscar</label><input id="c-q" class="input" placeholder="Nombre o correo"></div>
+          <button class="btn btn-primary ml-auto" id="btn-nuevo-cli">+ Agregar cliente</button>
+        </div>
+        <div class="card mt-4 overflow-x-auto">
+          <table class="w-full text-sm min-w-[760px]">
+            <thead class="text-left text-xs uppercase tracking-wider text-tinta/60 border-b border-[var(--linea)]"><tr><th class="p-3">#</th><th class="p-3">Cliente</th><th class="p-3">Teléfono</th><th class="p-3">Registro</th><th class="p-3">Reservas</th><th class="p-3"></th></tr></thead>
+            <tbody id="tbody-cli"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RUTAS -->
+      <section id="view-rut" class="mt-6" hidden>
+        <div class="flex flex-wrap gap-3 items-center justify-between">
+          <p class="text-sm text-tinta/70 max-w-xl">Rutas que los clientes pueden pedir al reservar. Las «ocultas» no aparecen en el sitio. Al eliminar una ruta también se quita de las reservas que la tenían.</p>
+          <button class="btn btn-primary" id="btn-nueva-rut">+ Agregar ruta</button>
+        </div>
+        <div class="card mt-4 overflow-x-auto">
+          <table class="w-full text-sm min-w-[860px]">
+            <thead class="text-left text-xs uppercase tracking-wider text-tinta/60 border-b border-[var(--linea)]"><tr><th class="p-3">Ruta</th><th class="p-3">Distancia</th><th class="p-3">Dificultad</th><th class="p-3 text-right">Costo p/p</th><th class="p-3">En reservas</th><th class="p-3">Visible</th><th class="p-3"></th></tr></thead>
+            <tbody id="tbody-rut"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- RESEÑAS -->
+      <section id="view-rev" class="mt-6" hidden>
+        <div class="card overflow-x-auto">
+          <table class="w-full text-sm min-w-[760px]">
+            <thead class="text-left text-xs uppercase tracking-wider text-tinta/60 border-b border-[var(--linea)]"><tr><th class="p-3">Cliente</th><th class="p-3">País</th><th class="p-3">Nota</th><th class="p-3">Comentario</th><th class="p-3"></th></tr></thead>
+            <tbody id="tbody-rev"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- BASE DE DATOS -->
+      <section id="view-bd" class="mt-6" hidden>
+        <p class="text-sm text-tinta/70 max-w-2xl">Los datos viven en este navegador. Para pasar la información a otra computadora (o a un compañero), exporta una copia e impórtala allá.</p>
+        <div class="grid md:grid-cols-3 gap-4 mt-5">
+          <div class="card p-5"><h4 class="font-display text-lg text-deep">Exportar copia</h4><p class="text-sm text-tinta/70 mt-1">Descarga un archivo .json con clientes, reservas, rutas y reseñas.</p><button class="btn btn-outline mt-4" id="btn-export">Descargar copia</button></div>
+          <div class="card p-5"><h4 class="font-display text-lg text-deep">Importar copia</h4><p class="text-sm text-tinta/70 mt-1">Reemplaza los datos actuales por los de un archivo exportado.</p><input type="file" id="file-import" accept=".json,application/json" class="mt-4 text-sm"></div>
+          <div class="card p-5"><h4 class="font-display text-lg text-deep">Reiniciar</h4><p class="text-sm text-tinta/70 mt-1">Borra todo y deja los datos de ejemplo. La contraseña del administrador vuelve a <code>admin123</code>.</p><button class="btn btn-danger mt-4" id="btn-reset">Reiniciar base</button></div>
+        </div>
+        <form id="form-pass" class="card p-5 mt-4 max-w-xl grid sm:grid-cols-2 gap-4 items-end" novalidate>
+          <h4 class="font-display text-lg text-deep sm:col-span-2">Cambiar contraseña del administrador</h4>
+          <div class="field"><label for="p-actual">Contraseña actual</label><input id="p-actual" type="password" class="input" autocomplete="current-password"><p class="err"></p></div>
+          <div class="field"><label for="p-nueva">Nueva contraseña (mín. 6)</label><input id="p-nueva" type="password" class="input" autocomplete="new-password"><p class="err"></p></div>
+          <button class="btn btn-outline sm:col-span-2 justify-self-start">Guardar contraseña</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  </div>
+
+<!-- ============ MODAL EDITAR RESERVA ============ -->
+  <div class="modal" id="modal-edit" hidden role="dialog" aria-modal="true" aria-labelledby="edit-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel wide p-7">
+      <button class="modal-x" data-close aria-label="Cerrar" id="edit-x"></button>
+      <div id="edit-body"></div>
+    </div>
+  </div>
+
+  <!-- ============ MODAL FORMULARIO GENÉRICO ============ -->
+  <div class="modal" id="modal-form" hidden role="dialog" aria-modal="true" aria-labelledby="form-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel wide p-7">
+      <button class="modal-x" data-close aria-label="Cerrar" id="form-x"></button>
+      <h3 id="form-title" class="font-display text-2xl text-deep pr-10"></h3>
+      <div id="form-err" class="err mt-3 !text-sm" role="alert"></div>
+      <form id="form-generic" novalidate><div id="form-body"></div></form>
+    </div>
+  </div>
+
+  <!-- Autenticación -->
+  <div class="modal" id="modal-auth" hidden role="dialog" aria-modal="true" aria-labelledby="auth-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel max-w-md p-7">
+      <button class="modal-x" data-close aria-label="Cerrar" id="auth-x"></button>
+      <h3 id="auth-title" class="font-display text-2xl text-deep">Ingresa a tu cuenta</h3>
+      <div class="flex border-b border-[var(--linea)] mt-5 text-sm font-semibold" role="tablist">
+        <button type="button" role="tab" id="tab-login" class="px-4 py-2 border-b-2 border-deep text-deep" aria-selected="true">Iniciar sesión</button>
+        <button type="button" role="tab" id="tab-reg" class="px-4 py-2 border-b-2 border-transparent text-tinta/60" aria-selected="false">Crear cuenta</button>
+      </div>
+      <form id="form-login" class="mt-5 space-y-4" novalidate>
+        <div class="field"><label for="l-email">Correo</label><input id="l-email" type="email" class="input" autocomplete="email" data-focus><p class="err"></p></div>
+        <div class="field"><label for="l-pass">Contraseña</label><input id="l-pass" type="password" class="input" autocomplete="current-password"><p class="err"></p></div>
+        <p class="err" id="login-err" role="alert"></p>
+        <button class="btn btn-primary w-full">Ingresar</button>
+      </form>
+      <form id="form-reg" class="mt-5 space-y-4" hidden novalidate>
+        <div class="field"><label for="r-nombre">Nombre completo</label><input id="r-nombre" class="input" autocomplete="name"><p class="err"></p></div>
+        <div class="field"><label for="r-email">Correo</label><input id="r-email" type="email" class="input" autocomplete="email"><p class="err"></p></div>
+        <div class="field"><label for="r-tel">Teléfono / WhatsApp (opcional)</label><input id="r-tel" type="tel" class="input" autocomplete="tel"><p class="err"></p></div>
+        <div class="field"><label for="r-pass">Contraseña</label><input id="r-pass" type="password" class="input" autocomplete="new-password"><p class="err"></p><p class="text-xs text-tinta/60">Mínimo 8 caracteres, con letras y números.</p></div>
+        <p class="err" id="reg-err" role="alert"></p>
+        <button class="btn btn-primary w-full">Crear cuenta</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Detalle de habitación -->
+  <div class="modal" id="modal-room" hidden role="dialog" aria-modal="true" aria-label="Detalle de habitación">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel"><button class="modal-x" data-close aria-label="Cerrar" id="room-x"></button><div id="room-body"></div></div>
+  </div>
+
+  <!-- Ruta con mapa -->
+  <div class="modal" id="modal-ruta" hidden role="dialog" aria-modal="true" aria-label="Detalle de ruta turística">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel wide"><button class="modal-x" data-close aria-label="Cerrar" id="ruta-x"></button><div id="ruta-body"></div></div>
+  </div>
+
+  <!-- Mis reservas -->
+  <div class="modal" id="modal-mis" hidden role="dialog" aria-modal="true" aria-labelledby="mis-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel wide p-7"><button class="modal-x" data-close aria-label="Cerrar" id="mis-x"></button>
+      <h3 id="mis-title" class="font-display text-2xl text-deep">Mis reservas</h3><div id="mis-body" class="mt-5 space-y-4"></div></div>
+  </div>
+
+  <!-- Reseña -->
+  <div class="modal" id="modal-resena" hidden role="dialog" aria-modal="true" aria-labelledby="res-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel max-w-md p-7"><button class="modal-x" data-close aria-label="Cerrar" id="res-x"></button>
+      <h3 id="res-title" class="font-display text-2xl text-deep">Cuéntanos tu experiencia</h3>
+      <form id="form-resena" class="mt-5 space-y-4" novalidate>
+        <div class="field"><label for="rs-pais">País de origen</label><input id="rs-pais" class="input" maxlength="50" data-focus><p class="err"></p></div>
+        <div class="field"><label for="rs-cal">Calificación</label>
+          <select id="rs-cal" class="input"><option value="5">5 estrellas</option><option value="4">4 estrellas</option><option value="3">3 estrellas</option><option value="2">2 estrellas</option><option value="1">1 estrella</option></select></div>
+        <div class="field"><label for="rs-com">Comentario</label><textarea id="rs-com" rows="4" maxlength="800" class="input"></textarea><p class="err"></p></div>
+        <button class="btn btn-primary w-full">Publicar reseña</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Confirmación y pago -->
+  <div class="modal" id="modal-pay" hidden role="dialog" aria-modal="true" aria-labelledby="pay-title">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel p-7" style="max-width:560px"><button class="modal-x" data-close aria-label="Cerrar" id="pay-x"></button><div id="pay-body"></div></div>
+  </div>
+
+  <!-- Factura -->
+  <div class="modal" id="modal-factura" hidden role="dialog" aria-modal="true" aria-label="Factura">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel" style="max-width:720px"><button class="modal-x" data-close aria-label="Cerrar" id="fac-x"></button><div id="fac-body"></div></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script src="js/localapi.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/fullpage.js"></script>
+</body>
+</html>

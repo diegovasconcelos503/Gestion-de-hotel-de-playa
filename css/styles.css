@@ -1,0 +1,99 @@
+:root{
+  --deep:#0D3B3E; --crema:#F6F1E6; --lino:#FBF8F2; --cobre:#C17F52; --cobre-txt:#9A5B33; --tinta:#2E2E2E;
+  --linea:#E3DAC8; --libre:#FFFFFF; --ocupada:#E7E2D8;
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:Inter,system-ui,sans-serif;color:var(--tinta);background:var(--lino);-webkit-font-smoothing:antialiased}
+.font-display{font-family:'Playfair Display',Georgia,serif}
+:focus-visible{outline:2px solid var(--cobre);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+
+.eyebrow{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cobre-txt);font-weight:600}
+.title{font-family:'Playfair Display',Georgia,serif;color:var(--deep);font-weight:600;line-height:1.15}
+
+/* Botones: rectangulares, sin esquinas redondeadas pronunciadas */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border-radius:2px;font-size:.72rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;padding:.8rem 1.4rem;cursor:pointer;transition:background .2s,color .2s,border-color .2s;border:1px solid transparent}
+.btn-primary{background:var(--deep);color:#fff}
+.btn-primary:hover{background:#0a2f31}
+.btn-primary:disabled{background:#8aa0a1;cursor:not-allowed}
+.btn-outline{background:transparent;color:var(--deep);border-color:var(--deep)}
+.btn-outline:hover{background:var(--deep);color:#fff}
+.btn-danger{background:#fff;color:#9b2c2c;border-color:#d9a7a7}
+.btn-danger:hover{background:#9b2c2c;color:#fff}
+.btn-sm{padding:.5rem .85rem}
+
+.icon-circle{width:2.5rem;height:2.5rem;border-radius:9999px;background:var(--deep);color:#fff;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.icon-ring{width:2.4rem;height:2.4rem;border-radius:9999px;border:1px solid var(--deep);color:var(--deep);display:inline-flex;align-items:center;justify-content:center;transition:background .2s,color .2s}
+.icon-ring:hover{background:var(--deep);color:#fff}
+svg.ico{width:1.1em;height:1.1em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.ico.fill{fill:currentColor}
+
+.card{background:#fff;border-radius:6px;box-shadow:0 1px 2px rgba(13,59,62,.06),0 6px 20px rgba(13,59,62,.05)}
+
+/* Formularios */
+.field label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--deep);margin-bottom:.35rem}
+.input{width:100%;border:1px solid #cfc6b3;background:#fff;border-radius:2px;padding:.7rem .8rem;font-size:.92rem;color:var(--tinta)}
+.input:focus{outline:2px solid var(--deep);outline-offset:0;border-color:var(--deep)}
+.input.invalid{border-color:#b83a3a}
+.err{color:#b83a3a;font-size:.78rem;margin-top:.25rem;min-height:1rem}
+
+/* Modales */
+.modal{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;padding:1rem}
+.modal[hidden]{display:none}
+.modal-backdrop{position:absolute;inset:0;background:rgba(8,28,30,.62)}
+.modal-panel{position:relative;background:var(--lino);border-radius:6px;width:100%;max-width:640px;max-height:92vh;overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.modal-panel.wide{max-width:960px}
+.modal-x{position:absolute;top:.75rem;right:.75rem;z-index:2;background:#fff;border-radius:9999px;width:2.2rem;height:2.2rem;display:flex;align-items:center;justify-content:center;color:var(--deep);box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+/* Mapa de habitaciones */
+.room-grid{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:4px}
+.room{aspect-ratio:1/.82;font-size:.7rem;font-weight:600;border-radius:2px;border:1px solid var(--deep);background:var(--libre);color:var(--deep);cursor:pointer;transition:background .15s,color .15s}
+.room:hover:not(:disabled){background:#e4efef}
+.room.sel{background:var(--deep);color:#fff}
+.room:disabled{background:var(--ocupada);border-color:var(--ocupada);color:#a39c8c;cursor:not-allowed;text-decoration:line-through}
+@media (max-width:520px){.room-grid{grid-template-columns:repeat(7,minmax(0,1fr))}.room{aspect-ratio:1/.9;font-size:.68rem}}
+
+.badge{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:.2rem .55rem;border-radius:2px}
+.b-Pendiente{background:#fdf0d5;color:#7a5200}.b-Confirmada{background:#dff0e4;color:#1d5b34}.b-Cancelada{background:#eee;color:#666}
+
+.toast{position:fixed;left:50%;bottom:1.5rem;transform:translateX(-50%);z-index:90;background:var(--deep);color:#fff;padding:.75rem 1.2rem;border-radius:2px;font-size:.88rem;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:92vw}
+.toast.error{background:#8f2d2d}
+
+.hero-bg{background:linear-gradient(180deg,rgba(8,28,30,.35),rgba(8,28,30,.6)),url('../assets/img/hero.jpg') center/cover no-repeat}
+.leaflet-container{font-family:Inter,sans-serif}
+.skeleton{background:linear-gradient(90deg,#efe9dc,#f8f4ea,#efe9dc);background-size:200% 100%;animation:sk 1.4s infinite;border-radius:4px}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* Un elemento con atributo hidden NUNCA debe verse, aunque tenga clases de Tailwind como "flex" (era la causa de que el login del admin no desapareciera) */
+[hidden]{display:none!important}
+.spinner{width:56px;height:56px;border-radius:9999px;border:5px solid #e3dac8;border-top-color:var(--deep);animation:spin .9s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.paycard{display:block;border:1px solid #cfc6b3;background:#fff;border-radius:4px;padding:.9rem 1rem;cursor:pointer}
+input:checked+.paycard{border-color:var(--deep);box-shadow:0 0 0 2px var(--deep)}
+input:focus-visible+.paycard{outline:2px solid var(--cobre);outline-offset:2px}
+.logo-menu{position:absolute;left:0;top:calc(100% + 8px);min-width:210px;background:#fff;border:1px solid var(--linea);border-radius:6px;box-shadow:0 12px 30px rgba(0,0,0,.18);padding:.35rem;z-index:70}
+.logo-menu a,.logo-menu button{display:block;width:100%;text-align:left;padding:.55rem .75rem;font-size:.85rem;border-radius:4px;color:var(--tinta)}
+.logo-menu a:hover,.logo-menu button:hover{background:var(--crema);color:var(--deep)}
+@media print{
+  body>*:not(#modal-factura){display:none!important}
+  #modal-factura{position:static!important;display:block!important;padding:0!important}
+  #modal-factura .modal-backdrop,#modal-factura .modal-x,.no-print{display:none!important}
+  #modal-factura .modal-panel{box-shadow:none!important;max-height:none!important;overflow:visible!important;max-width:none!important}
+}
+
+/* ===== Full page (efecto diapositiva) ===== */
+html.fp{scroll-snap-type:y mandatory;scroll-padding-top:68px}
+html.fp #sitio>section,html.fp footer{scroll-snap-align:start;scroll-snap-stop:normal}
+html.fp #sitio>section{min-height:calc(100vh - 68px);display:flex;flex-direction:column;justify-content:center}
+html.fp #sitio>section#inicio{min-height:calc(100vh - 68px)}
+html.fp footer{min-height:50vh}
+@media (max-width:767px){html.fp{scroll-snap-type:y proximity}}
+@media (prefers-reduced-motion:reduce){html.fp{scroll-snap-type:none}}
+.fp-dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:12px}
+.fp-dots a{position:relative;width:11px;height:11px;border-radius:9999px;border:2px solid var(--deep);background:transparent;display:block;transition:background .2s,transform .2s}
+.fp-dots a.on{background:var(--deep);transform:scale(1.3)}
+.fp-dots a span{position:absolute;right:20px;top:50%;transform:translateY(-50%);background:var(--deep);color:#fff;font-size:.7rem;padding:.2rem .5rem;border-radius:2px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.fp-dots a:hover span{opacity:1}
+@media (max-width:767px){.fp-dots{display:none}}
+body.modal-open .fp-dots{display:none}
